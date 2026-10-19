@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useCart } from '../context/CartContext';
-import { CURRENCY, pakistaniCities } from '../data/menuData';
+import { CURRENCY, pakistaniCities, STORE_CONTACT } from '../data/menuData';
 
 export default function CheckoutModal({ isOpen, onClose, onOrderPlaced }) {
   const { 
@@ -19,10 +19,18 @@ export default function CheckoutModal({ isOpen, onClose, onOrderPlaced }) {
     phone: '',
     address: '',
     notes: '',
-    paymentMethod: 'cod'
+    paymentMethod: 'jazzcash',
+    transactionId: ''
   });
 
+  const [copiedJazzCash, setCopiedJazzCash] = useState(false);
   const [submitting, setSubmitting] = useState(false);
+
+  const handleCopyJazzCash = () => {
+    navigator.clipboard.writeText(STORE_CONTACT.jazzCashNumber);
+    setCopiedJazzCash(true);
+    setTimeout(() => setCopiedJazzCash(false), 2000);
+  };
 
   if (!isOpen) return null;
 
@@ -163,6 +171,26 @@ export default function CheckoutModal({ isOpen, onClose, onOrderPlaced }) {
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
               <label 
                 className={`p-3 rounded-2xl border flex flex-col items-center justify-center text-center cursor-pointer transition-all ${
+                  formData.paymentMethod === 'jazzcash' 
+                    ? 'bg-brand-gold/15 border-brand-gold text-white font-bold ring-1 ring-brand-gold' 
+                    : 'bg-brand-surface border-white/10 text-gray-400'
+                }`}
+              >
+                <input 
+                  type="radio" 
+                  name="paymentMethod" 
+                  value="jazzcash" 
+                  checked={formData.paymentMethod === 'jazzcash'} 
+                  onChange={() => setFormData({ ...formData, paymentMethod: 'jazzcash' })}
+                  className="hidden" 
+                />
+                <i className="fa-solid fa-mobile-screen-button text-brand-gold text-base mb-1"></i>
+                <span className="text-xs">JazzCash</span>
+                <span className="text-[9px] text-brand-gold font-semibold mt-0.5">{STORE_CONTACT.jazzCashNumber}</span>
+              </label>
+
+              <label 
+                className={`p-3 rounded-2xl border flex flex-col items-center justify-center text-center cursor-pointer transition-all ${
                   formData.paymentMethod === 'cod' 
                     ? 'bg-brand-gold/15 border-brand-gold text-white font-bold ring-1 ring-brand-gold' 
                     : 'bg-brand-surface border-white/10 text-gray-400'
@@ -176,29 +204,9 @@ export default function CheckoutModal({ isOpen, onClose, onOrderPlaced }) {
                   onChange={() => setFormData({ ...formData, paymentMethod: 'cod' })}
                   className="hidden" 
                 />
-                <i className="fa-solid fa-money-bill-wave text-brand-gold text-base mb-1"></i>
+                <i className="fa-solid fa-money-bill-wave text-emerald-400 text-base mb-1"></i>
                 <span className="text-xs">Cash on Delivery</span>
                 <span className="text-[9px] text-emerald-400 font-semibold mt-0.5">Pay at doorstep</span>
-              </label>
-
-              <label 
-                className={`p-3 rounded-2xl border flex flex-col items-center justify-center text-center cursor-pointer transition-all ${
-                  formData.paymentMethod === 'easypaisa' 
-                    ? 'bg-brand-gold/15 border-brand-gold text-white font-bold ring-1 ring-brand-gold' 
-                    : 'bg-brand-surface border-white/10 text-gray-400'
-                }`}
-              >
-                <input 
-                  type="radio" 
-                  name="paymentMethod" 
-                  value="easypaisa" 
-                  checked={formData.paymentMethod === 'easypaisa'} 
-                  onChange={() => setFormData({ ...formData, paymentMethod: 'easypaisa' })}
-                  className="hidden" 
-                />
-                <i className="fa-solid fa-mobile-screen-button text-emerald-400 text-base mb-1"></i>
-                <span className="text-xs">JazzCash / Easypaisa</span>
-                <span className="text-[9px] text-gray-400 mt-0.5">Mobile wallet</span>
               </label>
 
               <label 
@@ -221,6 +229,60 @@ export default function CheckoutModal({ isOpen, onClose, onOrderPlaced }) {
                 <span className="text-[9px] text-gray-400 mt-0.5">Visa / Mastercard</span>
               </label>
             </div>
+
+            {/* JazzCash Details Box */}
+            {formData.paymentMethod === 'jazzcash' && (
+              <div className="mt-3 p-4 rounded-2xl bg-gradient-to-br from-neutral-900 to-brand-surface border border-brand-gold/40 space-y-3 animate-fadeIn">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-2">
+                    <span className="w-6 h-6 rounded-lg bg-brand-gold/20 flex items-center justify-center text-brand-gold text-xs font-bold">
+                      <i className="fa-solid fa-money-bill-transfer"></i>
+                    </span>
+                    <span className="text-xs font-bold text-white">JazzCash Payment Details</span>
+                  </div>
+                  <span className="text-[10px] bg-brand-gold/20 text-brand-gold px-2 py-0.5 rounded-full font-bold">
+                    Instant Transfer
+                  </span>
+                </div>
+
+                <div className="bg-black/60 p-3 rounded-xl border border-white/10 flex items-center justify-between">
+                  <div>
+                    <span className="text-[10px] text-gray-400 uppercase tracking-wider block">JazzCash Account Number</span>
+                    <span className="text-base sm:text-lg font-black text-brand-gold font-heading tracking-wide">
+                      {STORE_CONTACT.jazzCashNumber}
+                    </span>
+                    <span className="text-[10px] text-gray-400 block mt-0.5">
+                      Title: <strong className="text-white">{STORE_CONTACT.jazzCashTitle}</strong>
+                    </span>
+                  </div>
+
+                  <button
+                    type="button"
+                    onClick={handleCopyJazzCash}
+                    className="px-3 py-1.5 rounded-xl bg-brand-surface border border-white/15 hover:border-brand-gold text-xs font-bold text-gray-200 hover:text-white transition-all flex items-center gap-1.5"
+                  >
+                    <i className={copiedJazzCash ? "fa-solid fa-check text-emerald-400" : "fa-regular fa-copy"}></i>
+                    <span>{copiedJazzCash ? 'Copied!' : 'Copy'}</span>
+                  </button>
+                </div>
+
+                <div className="space-y-1.5">
+                  <label className="block text-gray-300 font-semibold text-[11px]">
+                    Sender Mobile / Transaction ID (TID)
+                  </label>
+                  <input 
+                    type="text" 
+                    value={formData.transactionId}
+                    onChange={(e) => setFormData({ ...formData, transactionId: e.target.value })}
+                    placeholder="Enter your JazzCash number or TID (e.g. 03xx-xxxxxxx)"
+                    className="w-full bg-brand-surface text-white p-2.5 rounded-xl border border-white/10 focus:outline-none focus:border-brand-gold text-xs"
+                  />
+                  <p className="text-[10px] text-gray-400 italic">
+                    💡 Please send <strong>{CURRENCY} {grandTotal.toLocaleString()}</strong> to <strong>{STORE_CONTACT.jazzCashNumber}</strong>. We'll verify and prepare your meal right away!
+                  </p>
+                </div>
+              </div>
+            )}
           </div>
 
           {/* Quick Order Bill Summary */}

@@ -210,3 +210,12 @@ export const pakistaniCities = [
   'Hyderabad'
 ];
 
+export const STORE_CONTACT = {
+  phone: '03130031711',
+  phoneDisplay: '+92 313 0031711',
+  whatsappRaw: '923130031711',
+  whatsappUrl: 'https://wa.me/923130031711',
+  jazzCashNumber: '03195756359',
+  jazzCashTitle: 'The Crispy Corner'
+};
+

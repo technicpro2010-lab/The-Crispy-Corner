@@ -58,8 +58,15 @@ export default function OrderSuccessModal({ order, isOpen, onClose, onTrackOrder
             <div><strong className="text-white">Contact Phone:</strong> {order.customer.phone}</div>
             <div>
               <strong className="text-white">Payment:</strong>{' '}
-              {order.customer.paymentMethod === 'cod' ? 'Cash on Delivery (COD)' : 
-               order.customer.paymentMethod === 'easypaisa' ? 'JazzCash / Easypaisa' : 'Debit/Credit Card'}
+              {order.customer.paymentMethod === 'cod' ? (
+                <span className="text-emerald-400 font-semibold">Cash on Delivery (COD)</span>
+              ) : order.customer.paymentMethod === 'jazzcash' || order.customer.paymentMethod === 'easypaisa' ? (
+                <span className="text-brand-gold font-semibold">
+                  JazzCash ({order.customer.transactionId ? `TID: ${order.customer.transactionId} • ` : ''}Paid to 03195756359)
+                </span>
+              ) : (
+                <span className="text-gray-300">Debit / Credit Card</span>
+              )}
             </div>
           </div>
 

@@ -1,6 +1,6 @@
 import React from 'react';
 import { useCart } from '../context/CartContext';
-import { CURRENCY, pakistaniCities } from '../data/menuData';
+import { CURRENCY, pakistaniCities, STORE_CONTACT } from '../data/menuData';
 
 export default function Navbar({ onScrollToTracker }) {
   const { 
@@ -94,7 +94,7 @@ export default function Navbar({ onScrollToTracker }) {
 
             {/* WhatsApp Contact */}
             <a 
-              href="https://wa.me/923001234567?text=Hi%20The%20Crispy%20Corner!%20I%20have%20an%20inquiry%20about%20the%20menu" 
+              href={`${STORE_CONTACT.whatsappUrl}?text=Hi%20The%20Crispy%20Corner!%20I%20have%20an%20inquiry%20about%20the%20menu`} 
               target="_blank" 
               rel="noreferrer"
               className="hidden sm:flex items-center gap-2 px-4 py-2.5 rounded-full bg-emerald-600/20 text-emerald-400 border border-emerald-500/30 text-xs font-semibold hover:bg-emerald-600 hover:text-white transition-all shadow-sm"

@@ -1,6 +1,6 @@
 import React from 'react';
 import { useCart } from '../context/CartContext';
-import { CURRENCY } from '../data/menuData';
+import { CURRENCY, STORE_CONTACT } from '../data/menuData';
 
 export default function CartDrawer({ onOpenCheckout }) {
   const { 
@@ -43,7 +43,7 @@ export default function CartDrawer({ onOpenCheckout }) {
     message += `Please confirm my order and share estimated delivery time. Shukriya!`;
 
     const encoded = encodeURIComponent(message);
-    window.open(`https://wa.me/923001234567?text=${encoded}`, '_blank');
+    window.open(`https://wa.me/${STORE_CONTACT.whatsappRaw}?text=${encoded}`, '_blank');
   };
 
   const progressPercent = Math.min(100, Math.round((subtotal / FREE_DELIVERY_THRESHOLD) * 100));

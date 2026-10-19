@@ -1,4 +1,4 @@
-import React from 'react';
+import { STORE_CONTACT } from '../data/menuData';
 
 export default function Footer() {
   return (
@@ -40,8 +40,8 @@ export default function Footer() {
           <h4 className="text-sm font-bold text-white mb-3 font-heading uppercase tracking-wider">
             Order & Contact
           </h4>
-          <p className="text-xs text-gray-300">Hotline: <strong className="text-white">+92 (300) 274-7791</strong></p>
-          <p className="text-xs text-gray-300 mt-1">WhatsApp Orders: <strong className="text-emerald-400">+92 300 1234567</strong></p>
+          <p className="text-xs text-gray-300">Hotline: <strong className="text-white">{STORE_CONTACT.phoneDisplay}</strong></p>
+          <p className="text-xs text-gray-300 mt-1">WhatsApp Orders: <strong className="text-emerald-400">{STORE_CONTACT.phoneDisplay}</strong></p>
           <p className="text-xs text-gray-400 mt-1">Email: orders@thecrispycorner.pk</p>
           <p className="text-[11px] text-brand-gold mt-2 font-medium">Karachi • Lahore • Islamabad • Rawalpindi</p>
         </div>
@@ -61,7 +61,7 @@ export default function Footer() {
             <a href="#tiktok" className="w-8 h-8 rounded-full bg-brand-surface flex items-center justify-center text-gray-300 hover:text-brand-gold hover:bg-neutral-800 transition-colors">
               <i className="fa-brands fa-tiktok"></i>
             </a>
-            <a href="https://wa.me/923001234567" target="_blank" rel="noreferrer" className="w-8 h-8 rounded-full bg-brand-surface flex items-center justify-center text-emerald-400 hover:bg-emerald-600 hover:text-white transition-colors">
+            <a href={STORE_CONTACT.whatsappUrl} target="_blank" rel="noreferrer" className="w-8 h-8 rounded-full bg-brand-surface flex items-center justify-center text-emerald-400 hover:bg-emerald-600 hover:text-white transition-colors" title={`Chat on WhatsApp (${STORE_CONTACT.phone})`}>
               <i className="fa-brands fa-whatsapp"></i>
             </a>
           </div>
