@@ -68,6 +68,7 @@ export function CartProvider({ children }) {
       // Check if identical item with same customizations exists
       const existingIdx = prev.findIndex(item => 
         item.id === newItem.id &&
+        item.size === newItem.size &&
         item.spice === newItem.spice &&
         item.sauce === newItem.sauce &&
         item.extraCheese === newItem.extraCheese &&

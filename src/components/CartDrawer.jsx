@@ -29,6 +29,7 @@ export default function CartDrawer({ onOpenCheckout }) {
 
     cart.forEach((item, index) => {
       message += `${index + 1}. *${item.name}* x ${item.quantity}\n`;
+      if (item.size) message += `   📏 Size: ${item.sizeLabel || item.size}\n`;
       if (item.spice) message += `   🌶️ Spice: ${item.spice}\n`;
       if (item.sauce) message += `   🥣 Dip/Side: ${item.sauce}\n`;
       if (item.extraCheese) message += `   🧀 Extra Cheese: Yes\n`;
@@ -138,7 +139,12 @@ export default function CartDrawer({ onOpenCheckout }) {
                   <div className="space-y-1 flex-1">
                     <div className="font-bold text-white text-sm leading-snug">{item.name}</div>
                     
-                    <div className="text-[11px] text-gray-400 flex flex-wrap gap-1 items-center">
+                    <div className="text-[11px] text-gray-400 flex flex-wrap gap-1.5 items-center">
+                      {item.size && (
+                        <span className="bg-brand-gold/20 text-brand-gold border border-brand-gold/30 px-2 py-0.5 rounded text-[10px] font-bold">
+                          {item.size}
+                        </span>
+                      )}
                       {item.spice && <span>{item.spice}</span>}
                       {item.sauce && <span>• {item.sauce}</span>}
                       {item.extraCheese && <span className="text-brand-gold">• +Cheese</span>}

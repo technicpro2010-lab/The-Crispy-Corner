@@ -24,6 +24,10 @@ export default function MenuGrid() {
 
   const handleQuickAdd = (e, item) => {
     e.stopPropagation();
+    if (item.sizes && item.sizes.length > 0) {
+      setCustomizeItem(item);
+      return;
+    }
     addToCart({
       id: item.id,
       name: item.name,
@@ -112,12 +116,30 @@ export default function MenuGrid() {
               <p className="text-xs text-gray-400 line-clamp-2 mt-1.5 leading-relaxed">
                 {item.desc}
               </p>
+
+              {/* Size options preview tags */}
+              {item.sizes && item.sizes.length > 0 && (
+                <div className="flex flex-wrap gap-1 pt-2">
+                  {item.sizes.map(s => (
+                    <span 
+                      key={s.id} 
+                      onClick={() => setCustomizeItem(item)}
+                      className="text-[9px] bg-brand-surface/90 text-gray-300 hover:text-brand-gold border border-white/10 hover:border-brand-gold/40 px-1.5 py-0.5 rounded cursor-pointer transition-colors"
+                      title={s.label}
+                    >
+                      {s.name}: <strong className="text-brand-gold">{CURRENCY}{s.price}</strong>
+                    </span>
+                  ))}
+                </div>
+              )}
             </div>
 
             {/* Price & Action Buttons */}
             <div className="pt-3 border-t border-white/10 flex items-center justify-between gap-2">
               <div>
-                <span className="text-[10px] text-gray-400 block uppercase font-bold tracking-wider">Price</span>
+                <span className="text-[10px] text-gray-400 block uppercase font-bold tracking-wider">
+                  {item.sizes ? 'Starts From' : 'Price'}
+                </span>
                 <span className="text-lg font-black text-brand-gold font-heading">
                   {CURRENCY} {item.price.toLocaleString()}
                 </span>
@@ -127,14 +149,14 @@ export default function MenuGrid() {
                 <button 
                   onClick={() => setCustomizeItem(item)}
                   className="px-3 py-1.5 rounded-xl bg-brand-surface border border-white/10 text-xs font-semibold text-gray-200 hover:text-white hover:border-brand-gold hover:bg-brand-surface/80 transition-all cursor-pointer"
-                  title="Customize spice, cheese & dips"
+                  title={item.sizes ? "Select size and preferences" : "Customize spice, cheese & dips"}
                 >
-                  Customize
+                  {item.sizes ? 'Select Size' : 'Customize'}
                 </button>
                 <button 
                   onClick={(e) => handleQuickAdd(e, item)}
                   className="w-8 h-8 rounded-xl bg-brand-gold text-black hover:bg-yellow-400 font-extrabold flex items-center justify-center transition-all shadow-md shadow-brand-gold/20 active:scale-90 cursor-pointer"
-                  title="Quick Add to Cart"
+                  title={item.sizes ? "Select Size" : "Quick Add to Cart"}
                 >
                   <i className="fa-solid fa-plus text-xs"></i>
                 </button>

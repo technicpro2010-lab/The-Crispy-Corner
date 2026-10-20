@@ -2,7 +2,8 @@ export const CURRENCY = 'Rs.';
 
 export const categories = [
   { id: 'all', name: 'All Cravings', icon: 'fa-utensils' },
-  { id: 'burgers', name: 'Crispy Burgers', icon: 'fa-burger' },
+  { id: 'pizza', name: 'Fresh Crust Pizzas', icon: 'fa-pizza-slice' },
+  { id: 'burgers', name: 'Crispy Burgers & Kabuli', icon: 'fa-burger' },
   { id: 'chicken', name: 'Fried Chicken & Wings', icon: 'fa-drumstick-bite' },
   { id: 'fries', name: 'Loaded Fries', icon: 'fa-fire-burner' },
   { id: 'combos', name: 'Value Combos & Deals', icon: 'fa-boxes-stacked' },
@@ -11,6 +12,77 @@ export const categories = [
 ];
 
 export const menuItems = [
+  {
+    id: 'k1',
+    name: 'Quetta Famous Kabuli Burger',
+    category: 'burgers',
+    price: 420,
+    badge: 'Quetta Famous ⭐',
+    spicy: true,
+    rating: 5.0,
+    reviewsCount: 480,
+    image: 'https://images.unsplash.com/photo-1550547660-d9450f859349?auto=format&fit=crop&w=700&q=80',
+    desc: 'Authentic Quetta street-style Kabuli burger loaded with tender spiced beef/chicken kabab, hot golden french fries inside, sliced boiled egg, cabbage slaw & secret tangy Afghani green chutney.',
+    sizes: [
+      { id: 'regular', name: 'Regular', label: 'Regular (Single Kabab + Stuffed Fries)', price: 420 },
+      { id: 'double', name: 'Double', label: 'Double (2x Kabab + Extra Fries)', price: 580 },
+      { id: 'jumbo', name: 'Quetta King Jumbo', label: 'Quetta King Jumbo (3x Kabab + Cheese & Egg)', price: 760 }
+    ]
+  },
+  {
+    id: 'p1',
+    name: 'Chicken Fajita Supreme Pizza',
+    category: 'pizza',
+    price: 590,
+    badge: 'Best Seller Pizza',
+    spicy: true,
+    rating: 4.9,
+    reviewsCount: 390,
+    image: 'https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=700&q=80',
+    desc: 'Tender marinated chicken fajita chunks, crunchy bell peppers, sweet onions, black olives, Italian marinara sauce and 100% stretchy pure mozzarella cheese on freshly baked golden crust.',
+    sizes: [
+      { id: 'small', name: 'Small', label: 'Small 7" (4 Slices)', price: 590 },
+      { id: 'medium', name: 'Medium', label: 'Medium 10" (6 Slices)', price: 1090 },
+      { id: 'large', name: 'Large', label: 'Large 13" (8 Slices)', price: 1590 },
+      { id: 'jumbo', name: 'Jumbo Family', label: 'Jumbo Family 16" (10 Slices)', price: 2190 }
+    ]
+  },
+  {
+    id: 'p2',
+    name: 'Smoky Chicken Tikka Pizza',
+    category: 'pizza',
+    price: 590,
+    badge: 'Pakistani Classic',
+    spicy: true,
+    rating: 4.8,
+    reviewsCount: 312,
+    image: 'https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&w=700&q=80',
+    desc: 'Traditional charcoal-grilled chicken tikka boti, diced sweet onions, fresh green chilies, cilantro herbs, savory tomato sauce and double melted mozzarella.',
+    sizes: [
+      { id: 'small', name: 'Small', label: 'Small 7" (4 Slices)', price: 590 },
+      { id: 'medium', name: 'Medium', label: 'Medium 10" (6 Slices)', price: 1090 },
+      { id: 'large', name: 'Large', label: 'Large 13" (8 Slices)', price: 1590 },
+      { id: 'jumbo', name: 'Jumbo Family', label: 'Jumbo Family 16" (10 Slices)', price: 2190 }
+    ]
+  },
+  {
+    id: 'p3',
+    name: 'Creamy Crown Crust Cheese Pizza',
+    category: 'pizza',
+    price: 690,
+    badge: 'Stuffed Crown',
+    spicy: false,
+    rating: 4.9,
+    reviewsCount: 220,
+    image: 'https://images.unsplash.com/photo-1574071318508-1cdbab80d002?auto=format&fit=crop&w=700&q=80',
+    desc: 'White garlic ranch base with smoked grilled chicken chunks, mushrooms, sweet corn, melted mozzarella, and royal crown crust pockets stuffed with garlic cream cheese.',
+    sizes: [
+      { id: 'small', name: 'Small', label: 'Small 7" (4 Slices)', price: 690 },
+      { id: 'medium', name: 'Medium', label: 'Medium 10" (6 Slices)', price: 1290 },
+      { id: 'large', name: 'Large', label: 'Large 13" (8 Slices)', price: 1790 },
+      { id: 'jumbo', name: 'Jumbo Family', label: 'Jumbo Family 16" (10 Slices)', price: 2390 }
+    ]
+  },
   {
     id: 'c1',
     name: 'Monster Crispy Crunch Burger',
@@ -173,6 +245,7 @@ export const spiceLevels = [
 export const boxBuilderData = {
   mains: [
     { id: 'b1', name: 'Classic Zinger Crisp Burger', extraPrice: 0 },
+    { id: 'b5', name: 'Quetta Famous Kabuli Burger', extraPrice: 0 },
     { id: 'b2', name: 'Monster Crispy Crunch Burger', extraPrice: 190 },
     { id: 'b3', name: 'Crispy Beef Smash Burger', extraPrice: 250 },
     { id: 'b4', name: 'Crispy Chicken Wrap', extraPrice: 50 }
@@ -202,9 +275,10 @@ export const pakistaniCities = [
   'Lahore',
   'Islamabad',
   'Rawalpindi',
+  'Quetta',
+  'Peshawar',
   'Faisalabad',
   'Multan',
-  'Peshawar',
   'Gujranwala',
   'Sialkot',
   'Hyderabad'

@@ -75,7 +75,7 @@ export default function OrderSuccessModal({ order, isOpen, onClose, onTrackOrder
             <span className="text-[10px] text-gray-400 font-bold uppercase block">Items Ordered:</span>
             {order.items.map((item, idx) => (
               <div key={idx} className="flex justify-between text-xs text-gray-300">
-                <span>{item.quantity}x {item.name} {item.spice ? `(${item.spice})` : ''}</span>
+                <span>{item.quantity}x {item.name} {item.size ? `[${item.size}]` : ''} {item.spice ? `(${item.spice})` : ''}</span>
                 <span className="font-semibold text-white">{CURRENCY} {(item.price * item.quantity).toLocaleString()}</span>
               </div>
             ))}

@@ -5,6 +5,7 @@ import { sauceOptions, spiceLevels, CURRENCY } from '../data/menuData';
 export default function CustomizeModal() {
   const { customizeItem, setCustomizeItem, addToCart, setIsCartOpen } = useCart();
 
+  const [selectedSize, setSelectedSize] = useState(null);
   const [selectedSpice, setSelectedSpice] = useState('Crispy Spicy');
   const [selectedSauce, setSelectedSauce] = useState(sauceOptions[0].name);
   const [addExtraCheese, setAddExtraCheese] = useState(false);
@@ -13,6 +14,7 @@ export default function CustomizeModal() {
 
   useEffect(() => {
     if (customizeItem) {
+      setSelectedSize(customizeItem.sizes && customizeItem.sizes.length > 0 ? customizeItem.sizes[0] : null);
       setSelectedSpice(customizeItem.spicy ? 'Crispy Spicy' : 'Mild Cheesy');
       setSelectedSauce(sauceOptions[0].name);
       setAddExtraCheese(false);
@@ -25,13 +27,16 @@ export default function CustomizeModal() {
 
   const extraCheesePrice = addExtraCheese ? 100 : 0;
   const sauceExtraPrice = 80; // Included dipping sauce addon
-  const unitPrice = customizeItem.price + extraCheesePrice + (selectedSauce ? sauceExtraPrice : 0);
+  const basePrice = selectedSize ? selectedSize.price : customizeItem.price;
+  const unitPrice = basePrice + extraCheesePrice + (selectedSauce ? sauceExtraPrice : 0);
   const totalPrice = unitPrice * quantity;
 
   const handleConfirmAdd = () => {
     addToCart({
       id: customizeItem.id,
       name: customizeItem.name,
+      size: selectedSize ? selectedSize.name : null,
+      sizeLabel: selectedSize ? selectedSize.label : null,
       price: unitPrice,
       image: customizeItem.image,
       spice: selectedSpice,
@@ -70,6 +75,49 @@ export default function CustomizeModal() {
         {/* Modal Form */}
         <div className="space-y-4 text-xs">
           
+          {/* Size Selection (for Pizza & Kabuli Burger items with sizes) */}
+          {customizeItem.sizes && customizeItem.sizes.length > 0 && (
+            <div className="bg-brand-surface/70 p-3.5 rounded-2xl border border-brand-gold/30 space-y-2">
+              <div className="flex items-center justify-between">
+                <label className="font-extrabold text-brand-gold uppercase text-[11px] tracking-wider flex items-center gap-1.5">
+                  <i className="fa-solid fa-arrows-up-down-left-right text-xs"></i>
+                  <span>Select Size & Portion</span>
+                </label>
+                <span className="text-[10px] text-gray-400 font-medium">
+                  {selectedSize ? selectedSize.name : 'Select'}
+                </span>
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                {customizeItem.sizes.map((s) => {
+                  const isSelected = selectedSize?.id === s.id;
+                  return (
+                    <button
+                      key={s.id}
+                      type="button"
+                      onClick={() => setSelectedSize(s)}
+                      className={`p-3 rounded-xl border text-left transition-all cursor-pointer flex flex-col justify-between ${
+                        isSelected
+                          ? 'bg-brand-gold/20 border-brand-gold text-white ring-2 ring-brand-gold/40 shadow-lg'
+                          : 'bg-brand-dark/80 border-white/10 text-gray-300 hover:border-white/30'
+                      }`}
+                    >
+                      <div className="flex items-center justify-between">
+                        <span className={`text-xs font-bold ${isSelected ? 'text-white' : 'text-gray-200'}`}>
+                          {s.name}
+                        </span>
+                        <span className="text-xs font-black text-brand-gold font-heading">
+                          {CURRENCY} {s.price.toLocaleString()}
+                        </span>
+                      </div>
+                      <span className="text-[10px] text-gray-400 mt-1 line-clamp-1">{s.label}</span>
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
+          )}
+
           {/* Spice Level */}
           <div>
             <label className="block font-bold text-gray-300 mb-2 uppercase text-[11px] tracking-wider">
