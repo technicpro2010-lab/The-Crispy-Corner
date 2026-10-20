@@ -1,3 +1,5 @@
+import kabuliBurgerImage from '../assets/quetta-kabuli-burger.jpg';
+
 export const CURRENCY = 'Rs.';
 
 export const categories = [
@@ -21,7 +23,7 @@ export const menuItems = [
     spicy: true,
     rating: 5.0,
     reviewsCount: 480,
-    image: 'https://images.unsplash.com/photo-1550547660-d9450f859349?auto=format&fit=crop&w=700&q=80',
+    image: kabuliBurgerImage,
     desc: 'Authentic Quetta street-style Kabuli burger loaded with tender spiced beef/chicken kabab, hot golden french fries inside, sliced boiled egg, cabbage slaw & secret tangy Afghani green chutney.',
     sizes: [
       { id: 'regular', name: 'Regular', label: 'Regular (Single Kabab + Stuffed Fries)', price: 420 },
@@ -292,4 +294,3 @@ export const STORE_CONTACT = {
   jazzCashNumber: '03195756359',
   jazzCashTitle: 'The Crispy Corner'
 };
-
