@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useCart } from '../context/CartContext';
-import { sauceOptions, spiceLevels, CURRENCY } from '../data/menuData';
+import { sauceOptions, spiceLevels, CURRENCY, getItemSizes } from '../data/menuData';
 
 export default function CustomizeModal() {
   const { customizeItem, setCustomizeItem, addToCart, setIsCartOpen } = useCart();
@@ -12,9 +12,11 @@ export default function CustomizeModal() {
   const [specialNote, setSpecialNote] = useState('');
   const [quantity, setQuantity] = useState(1);
 
+  const itemSizes = customizeItem ? getItemSizes(customizeItem) : [];
+
   useEffect(() => {
     if (customizeItem) {
-      setSelectedSize(customizeItem.sizes && customizeItem.sizes.length > 0 ? customizeItem.sizes[0] : null);
+      setSelectedSize(getItemSizes(customizeItem)[0]);
       setSelectedSpice(customizeItem.spicy ? 'Crispy Spicy' : 'Mild Cheesy');
       setSelectedSauce(sauceOptions[0].name);
       setAddExtraCheese(false);
@@ -75,9 +77,7 @@ export default function CustomizeModal() {
         {/* Modal Form */}
         <div className="space-y-4 text-xs">
           
-          {/* Size Selection (for Pizza & Kabuli Burger items with sizes) */}
-          {customizeItem.sizes && customizeItem.sizes.length > 0 && (
-            <div className="bg-brand-surface/70 p-3.5 rounded-2xl border border-brand-gold/30 space-y-2">
+          <div className="bg-brand-surface/70 p-3.5 rounded-2xl border border-brand-gold/30 space-y-2">
               <div className="flex items-center justify-between">
                 <label className="font-extrabold text-brand-gold uppercase text-[11px] tracking-wider flex items-center gap-1.5">
                   <i className="fa-solid fa-arrows-up-down-left-right text-xs"></i>
@@ -89,7 +89,7 @@ export default function CustomizeModal() {
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                {customizeItem.sizes.map((s) => {
+                {itemSizes.map((s) => {
                   const isSelected = selectedSize?.id === s.id;
                   return (
                     <button
@@ -115,8 +115,7 @@ export default function CustomizeModal() {
                   );
                 })}
               </div>
-            </div>
-          )}
+          </div>
 
           {/* Spice Level */}
           <div>
@@ -256,4 +255,3 @@ export default function CustomizeModal() {
     </div>
   );
 }
-

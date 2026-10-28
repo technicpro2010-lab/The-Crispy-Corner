@@ -54,18 +54,20 @@ export default function OrderSuccessModal({ order, isOpen, onClose, onTrackOrder
           </div>
 
           <div className="space-y-1 text-gray-300">
-            <div><strong className="text-white">Delivery to:</strong> {order.customer.address}, {order.customer.city}</div>
+            <div><strong className="text-white">Delivery address:</strong> {order.customer.address}</div>
             <div><strong className="text-white">Contact Phone:</strong> {order.customer.phone}</div>
             <div>
               <strong className="text-white">Payment:</strong>{' '}
               {order.customer.paymentMethod === 'cod' ? (
                 <span className="text-emerald-400 font-semibold">Cash on Delivery (COD)</span>
-              ) : order.customer.paymentMethod === 'jazzcash' || order.customer.paymentMethod === 'easypaisa' ? (
+              ) : order.customer.paymentMethod === 'jazzcash' ? (
                 <span className="text-brand-gold font-semibold">
-                  JazzCash ({order.customer.transactionId ? `TID: ${order.customer.transactionId} • ` : ''}Paid to 03195756359)
+                  JazzCash (payment confirmation pending)
                 </span>
+              ) : order.customer.paymentMethod === 'easypaisa' ? (
+                <span className="text-brand-gold font-semibold">Easypaisa (payment instructions pending)</span>
               ) : (
-                <span className="text-gray-300">Debit / Credit Card</span>
+                <span className="text-gray-300">Debit / Credit Card (payment arrangement pending)</span>
               )}
             </div>
           </div>
@@ -82,7 +84,7 @@ export default function OrderSuccessModal({ order, isOpen, onClose, onTrackOrder
           </div>
 
           <div className="pt-2 border-t border-white/10 flex justify-between items-center text-sm font-bold text-white">
-            <span>Total Amount Paid / Due:</span>
+            <span>Order Total:</span>
             <span className="text-brand-gold font-heading text-base">{CURRENCY} {order.grandTotal.toLocaleString()}</span>
           </div>
         </div>
@@ -111,4 +113,3 @@ export default function OrderSuccessModal({ order, isOpen, onClose, onTrackOrder
     </div>
   );
 }
-

@@ -5,7 +5,7 @@ export const CURRENCY = 'Rs.';
 export const categories = [
   { id: 'all', name: 'All Cravings', icon: 'fa-utensils' },
   { id: 'pizza', name: 'Fresh Crust Pizzas', icon: 'fa-pizza-slice' },
-  { id: 'burgers', name: 'Crispy Burgers & Kabuli', icon: 'fa-burger' },
+  { id: 'burgers', name: 'Crispy Burgers & Kabuli Burger', icon: 'fa-burger' },
   { id: 'chicken', name: 'Fried Chicken & Wings', icon: 'fa-drumstick-bite' },
   { id: 'fries', name: 'Loaded Fries', icon: 'fa-fire-burner' },
   { id: 'combos', name: 'Value Combos & Deals', icon: 'fa-boxes-stacked' },
@@ -16,10 +16,10 @@ export const categories = [
 export const menuItems = [
   {
     id: 'k1',
-    name: 'Quetta Famous Kabuli Burger',
+    name: 'Kabuli Burger',
     category: 'burgers',
     price: 420,
-    badge: 'Quetta Famous ⭐',
+    badge: 'Signature ⭐',
     spicy: true,
     rating: 5.0,
     reviewsCount: 480,
@@ -28,7 +28,7 @@ export const menuItems = [
     sizes: [
       { id: 'regular', name: 'Regular', label: 'Regular (Single Kabab + Stuffed Fries)', price: 420 },
       { id: 'double', name: 'Double', label: 'Double (2x Kabab + Extra Fries)', price: 580 },
-      { id: 'jumbo', name: 'Quetta King Jumbo', label: 'Quetta King Jumbo (3x Kabab + Cheese & Egg)', price: 760 }
+      { id: 'jumbo', name: 'Jumbo', label: 'Jumbo (3x Kabab + Cheese & Egg)', price: 760 }
     ]
   },
   {
@@ -95,7 +95,11 @@ export const menuItems = [
     rating: 4.9,
     reviewsCount: 342,
     image: 'https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=700&q=80',
-    desc: 'Double crispy zesty chicken patty, melt-in-mouth yellow cheddar, signature dynamite dip, iceberg lettuce on butter-toasted brioche bun.'
+    desc: 'Double crispy zesty chicken patty, melt-in-mouth yellow cheddar, signature dynamite dip, iceberg lettuce on butter-toasted brioche bun.',
+    sizes: [
+      { id: 'double', name: 'Double', label: '2 crispy chicken patties', price: 890 },
+      { id: 'triple', name: 'Triple', label: '3 crispy chicken patties', price: 1140 }
+    ]
   },
   {
     id: 'c2',
@@ -107,7 +111,11 @@ export const menuItems = [
     rating: 4.8,
     reviewsCount: 289,
     image: 'https://images.unsplash.com/photo-1550547660-d9450f859349?auto=format&fit=crop&w=700&q=80',
-    desc: 'Golden-fried 100% chicken breast fillet, creamy garlic mayo, freshly shredded lettuce on warm sesame bun.'
+    desc: 'Golden-fried 100% chicken breast fillet, creamy garlic mayo, freshly shredded lettuce on warm sesame bun.',
+    sizes: [
+      { id: 'single', name: 'Single', label: '1 crispy chicken fillet', price: 650 },
+      { id: 'double', name: 'Double', label: '2 crispy chicken fillets', price: 870 }
+    ]
   },
   {
     id: 'c3',
@@ -119,7 +127,12 @@ export const menuItems = [
     rating: 4.7,
     reviewsCount: 195,
     image: 'https://images.unsplash.com/photo-1527477396000-e27163b481c2?auto=format&fit=crop&w=700&q=80',
-    desc: 'Extra crunchy battered wings tossed in fiery sweet chili buffalo glaze, served with creamy ranch dip.'
+    desc: 'Extra crunchy battered wings tossed in fiery sweet chili buffalo glaze, served with creamy ranch dip.',
+    sizes: [
+      { id: '6-piece', name: '6 Pieces', label: 'Six wings', price: 620 },
+      { id: '12-piece', name: '12 Pieces', label: 'Twelve wings', price: 1090 },
+      { id: '18-piece', name: '18 Pieces', label: 'Eighteen wings', price: 1590 }
+    ]
   },
   {
     id: 'c4',
@@ -131,7 +144,11 @@ export const menuItems = [
     rating: 4.9,
     reviewsCount: 412,
     image: 'https://images.unsplash.com/photo-1576107232684-1279f390859f?auto=format&fit=crop&w=700&q=80',
-    desc: 'Crisp golden potato fries loaded with diced crispy chicken tenders, molten cheese sauce, spicy jalapenos & dynamite drizzle.'
+    desc: 'Crisp golden potato fries loaded with diced crispy chicken tenders, molten cheese sauce, spicy jalapenos & dynamite drizzle.',
+    sizes: [
+      { id: 'regular', name: 'Regular', label: 'Regular serving', price: 550 },
+      { id: 'large', name: 'Large', label: 'Large serving', price: 850 }
+    ]
   },
   {
     id: 'c5',
@@ -143,7 +160,11 @@ export const menuItems = [
     rating: 4.6,
     reviewsCount: 167,
     image: 'https://images.unsplash.com/photo-1626700051175-6818013e1d4f?auto=format&fit=crop&w=700&q=80',
-    desc: 'Golden crispy chicken strips wrapped in a toasted flour tortilla with garlic herb mayo, diced tomatoes & crispy slaw.'
+    desc: 'Golden crispy chicken strips wrapped in a toasted flour tortilla with garlic herb mayo, diced tomatoes & crispy slaw.',
+    sizes: [
+      { id: 'single', name: 'Single', label: 'One crispy chicken wrap', price: 590 },
+      { id: 'double', name: 'Double', label: 'Two crispy chicken wraps', price: 990 }
+    ]
   },
   {
     id: 'c6',
@@ -155,7 +176,12 @@ export const menuItems = [
     rating: 4.9,
     reviewsCount: 310,
     image: 'https://images.unsplash.com/photo-1561758033-d89a9ad46330?auto=format&fit=crop&w=700&q=80',
-    desc: 'Secret 12-spice marinated fried chicken pieces with signature crunchy coating, served with fresh dinner roll & garlic dip.'
+    desc: 'Secret 12-spice marinated fried chicken pieces with signature crunchy coating, served with fresh dinner roll & garlic dip.',
+    sizes: [
+      { id: '3-piece', name: '3 Pieces', label: 'Three-piece broast bucket', price: 790 },
+      { id: '5-piece', name: '5 Pieces', label: 'Five-piece broast bucket', price: 1190 },
+      { id: '9-piece', name: '9 Pieces', label: 'Family-size nine-piece bucket', price: 1990 }
+    ]
   },
   {
     id: 'c7',
@@ -167,7 +193,11 @@ export const menuItems = [
     rating: 4.8,
     reviewsCount: 145,
     image: 'https://images.unsplash.com/photo-1586190848861-99aa4a171e90?auto=format&fit=crop&w=700&q=80',
-    desc: 'Double smashed beef patties with crispy grilled edges, American cheese, caramelized onions & secret truffle burger sauce.'
+    desc: 'Double smashed beef patties with crispy grilled edges, American cheese, caramelized onions & secret truffle burger sauce.',
+    sizes: [
+      { id: 'double', name: 'Double', label: '2 smashed beef patties', price: 980 },
+      { id: 'triple', name: 'Triple', label: '3 smashed beef patties', price: 1280 }
+    ]
   },
   {
     id: 'c8',
@@ -179,7 +209,11 @@ export const menuItems = [
     rating: 5.0,
     reviewsCount: 520,
     image: 'https://images.unsplash.com/photo-1610440042657-612c34d95e9f?auto=format&fit=crop&w=700&q=80',
-    desc: '1 Classic Zinger Burger + 2 Crispy Wings + Regular Salted Fries + 1 Garlic Mayo Dip + 500ml Chilled Drink.'
+    desc: '1 Classic Zinger Burger + 2 Crispy Wings + Regular Salted Fries + 1 Garlic Mayo Dip + 500ml Chilled Drink.',
+    sizes: [
+      { id: 'single', name: 'Single Box', label: '1 burger, 2 wings, fries, dip & 500ml drink', price: 1450 },
+      { id: 'family', name: 'Family Box', label: '2 burgers, 4 wings, large fries, 2 dips & 2 drinks', price: 2690 }
+    ]
   },
   {
     id: 'c9',
@@ -191,7 +225,11 @@ export const menuItems = [
     rating: 4.7,
     reviewsCount: 88,
     image: 'https://images.unsplash.com/photo-1630384060421-cb20d0e0649d?auto=format&fit=crop&w=700&q=80',
-    desc: 'Spiral seasoned curly fries smothered in rich garlic butter glaze and warm melted cheddar cheese.'
+    desc: 'Spiral seasoned curly fries smothered in rich garlic butter glaze and warm melted cheddar cheese.',
+    sizes: [
+      { id: 'regular', name: 'Regular', label: 'Regular serving', price: 490 },
+      { id: 'large', name: 'Large', label: 'Large serving', price: 750 }
+    ]
   },
   {
     id: 'c10',
@@ -203,7 +241,12 @@ export const menuItems = [
     rating: 4.9,
     reviewsCount: 610,
     image: 'https://images.unsplash.com/photo-1622483767028-3f66f32aef97?auto=format&fit=crop&w=700&q=80',
-    desc: 'Ice-cold refreshing beverage served chilled to complement your hot crunchy meal.'
+    desc: 'Ice-cold refreshing beverage served chilled to complement your hot crunchy meal.',
+    sizes: [
+      { id: '500ml', name: '500 ml', label: '500 ml bottle', price: 150 },
+      { id: '1l', name: '1 Liter', label: '1 liter bottle', price: 260 },
+      { id: '1.5l', name: '1.5 Liters', label: '1.5 liter bottle', price: 350 }
+    ]
   },
   {
     id: 'c11',
@@ -215,7 +258,12 @@ export const menuItems = [
     rating: 4.8,
     reviewsCount: 140,
     image: 'https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?auto=format&fit=crop&w=700&q=80',
-    desc: 'Freshly crushed mint leaves, lemon juice, soda and crushed ice. Ultimate heat buster!'
+    desc: 'Freshly crushed mint leaves, lemon juice, soda and crushed ice. Ultimate heat buster!',
+    sizes: [
+      { id: 'regular', name: 'Regular', label: 'Regular glass (350 ml)', price: 280 },
+      { id: 'large', name: 'Large', label: 'Large glass (500 ml)', price: 380 },
+      { id: '1l', name: '1 Liter', label: '1 liter bottle', price: 650 }
+    ]
   },
   {
     id: 'c12',
@@ -227,9 +275,20 @@ export const menuItems = [
     rating: 4.9,
     reviewsCount: 420,
     image: 'https://images.unsplash.com/photo-1472476443507-c7a5948772fc?auto=format&fit=crop&w=700&q=80',
-    desc: 'Our famous thick & velvety garlic mayo whipped with herbs. Irresistible dipping companion.'
+    desc: 'Our famous thick & velvety garlic mayo whipped with herbs. Irresistible dipping companion.',
+    sizes: [
+      { id: '2oz', name: '2 oz', label: '2 oz dipping cup', price: 80 },
+      { id: '4oz', name: '4 oz', label: '4 oz dipping cup', price: 140 },
+      { id: '8oz', name: '8 oz', label: '8 oz dipping cup', price: 250 }
+    ]
   }
 ];
+
+export const getItemSizes = (item) => (
+  item.sizes?.length
+    ? item.sizes
+    : [{ id: 'regular', name: 'Regular', label: 'Standard portion', price: item.price }]
+);
 
 export const sauceOptions = [
   { id: 'garlic-mayo', name: 'Garlic Mayo Dip', price: 80 },
@@ -247,7 +306,7 @@ export const spiceLevels = [
 export const boxBuilderData = {
   mains: [
     { id: 'b1', name: 'Classic Zinger Crisp Burger', extraPrice: 0 },
-    { id: 'b5', name: 'Quetta Famous Kabuli Burger', extraPrice: 0 },
+    { id: 'b5', name: 'Kabuli Burger', extraPrice: 0 },
     { id: 'b2', name: 'Monster Crispy Crunch Burger', extraPrice: 190 },
     { id: 'b3', name: 'Crispy Beef Smash Burger', extraPrice: 250 },
     { id: 'b4', name: 'Crispy Chicken Wrap', extraPrice: 50 }

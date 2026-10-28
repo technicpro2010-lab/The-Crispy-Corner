@@ -1,6 +1,6 @@
 import React from 'react';
 import { useCart } from '../context/CartContext';
-import { CURRENCY, pakistaniCities, STORE_CONTACT } from '../data/menuData';
+import { CURRENCY, STORE_CONTACT } from '../data/menuData';
 
 export default function Navbar({ onScrollToTracker }) {
   const { 
@@ -9,8 +9,6 @@ export default function Navbar({ onScrollToTracker }) {
     setIsCartOpen, 
     searchQuery, 
     setSearchQuery,
-    selectedCity,
-    setSelectedCity,
     activeOrder
   } = useCart();
 
@@ -19,7 +17,7 @@ export default function Navbar({ onScrollToTracker }) {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-20 gap-3">
           
-          {/* Logo & City Selector */}
+          {/* Logo */}
           <div className="flex items-center gap-4">
             <div 
               className="flex items-center gap-3 cursor-pointer group"
@@ -38,22 +36,6 @@ export default function Navbar({ onScrollToTracker }) {
               </div>
             </div>
 
-            {/* City selector badge */}
-            <div className="hidden lg:flex items-center gap-1.5 bg-brand-surface/80 border border-white/10 rounded-full px-3 py-1 text-xs text-gray-300">
-              <i className="fa-solid fa-location-dot text-brand-gold text-[11px]"></i>
-              <select 
-                value={selectedCity} 
-                onChange={(e) => setSelectedCity(e.target.value)}
-                aria-label="Select delivery city"
-                className="bg-transparent text-white font-medium text-xs focus:outline-none cursor-pointer pr-1"
-              >
-                {pakistaniCities.map(city => (
-                  <option key={city} value={city} className="bg-brand-card text-white">
-                    {city}
-                  </option>
-                ))}
-              </select>
-            </div>
           </div>
 
           {/* Desktop Search Bar */}
@@ -124,7 +106,7 @@ export default function Navbar({ onScrollToTracker }) {
           </div>
         </div>
 
-        {/* Mobile Search Bar & City Selector */}
+        {/* Mobile Search Bar */}
         <div className="pb-3 pt-1 md:hidden space-y-2">
           <div className="relative">
             <input 
@@ -145,33 +127,18 @@ export default function Navbar({ onScrollToTracker }) {
             )}
           </div>
           
-          <div className="flex items-center justify-between text-xs text-gray-400 px-1">
-            <div className="flex items-center gap-1.5">
-              <i className="fa-solid fa-location-dot text-brand-gold"></i>
-              <span>Delivering in:</span>
-              <select 
-                value={selectedCity} 
-                onChange={(e) => setSelectedCity(e.target.value)}
-                aria-label="Select mobile delivery city"
-                className="bg-brand-surface text-white rounded px-2 py-0.5 border border-white/10 text-xs font-semibold focus:outline-none"
-              >
-                {pakistaniCities.map(city => (
-                  <option key={city} value={city}>{city}</option>
-                ))}
-              </select>
-            </div>
-            {activeOrder && (
+          {activeOrder && (
+            <div className="flex justify-end text-xs px-1">
               <button 
                 onClick={onScrollToTracker} 
                 className="text-brand-gold font-bold flex items-center gap-1 underline"
               >
                 <i className="fa-solid fa-clock-rotate-left text-[11px]"></i> Track Order
               </button>
-            )}
-          </div>
+            </div>
+          )}
         </div>
       </div>
     </header>
   );
 }
-

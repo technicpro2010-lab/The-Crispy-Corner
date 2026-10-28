@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useCart } from '../context/CartContext';
-import { CURRENCY, pakistaniCities, STORE_CONTACT } from '../data/menuData';
+import { CURRENCY, STORE_CONTACT } from '../data/menuData';
 
 export default function CheckoutModal({ isOpen, onClose, onOrderPlaced }) {
   const { 
@@ -8,8 +8,6 @@ export default function CheckoutModal({ isOpen, onClose, onOrderPlaced }) {
     subtotal, 
     deliveryFee, 
     grandTotal, 
-    selectedCity, 
-    setSelectedCity,
     setActiveOrder,
     clearCart
   } = useCart();
@@ -43,8 +41,7 @@ export default function CheckoutModal({ isOpen, onClose, onOrderPlaced }) {
       orderId,
       createdAt: new Date().toISOString(),
       customer: {
-        ...formData,
-        city: selectedCity
+        ...formData
       },
       items: [...cart],
       subtotal,
@@ -92,8 +89,8 @@ export default function CheckoutModal({ isOpen, onClose, onOrderPlaced }) {
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             <div>
               <label className="block text-gray-300 font-bold mb-1">Full Name *</label>
-              <input 
-                type="text" 
+              <input
+                type="text"
                 required 
                 value={formData.name}
                 onChange={(e) => setFormData({ ...formData, name: e.target.value })}
@@ -110,31 +107,6 @@ export default function CheckoutModal({ isOpen, onClose, onOrderPlaced }) {
                 value={formData.phone}
                 onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                 placeholder="0300-1234567"
-                className="w-full bg-brand-surface text-white p-3 rounded-xl border border-white/10 focus:outline-none focus:border-brand-gold"
-              />
-            </div>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-            <div>
-              <label className="block text-gray-300 font-bold mb-1">City *</label>
-              <select 
-                value={selectedCity} 
-                onChange={(e) => setSelectedCity(e.target.value)}
-                className="w-full bg-brand-surface text-white p-3 rounded-xl border border-white/10 focus:outline-none focus:border-brand-gold cursor-pointer"
-              >
-                {pakistaniCities.map(city => (
-                  <option key={city} value={city} className="bg-brand-card">{city}</option>
-                ))}
-              </select>
-            </div>
-
-            <div>
-              <label className="block text-gray-300 font-bold mb-1">Area / Sector *</label>
-              <input 
-                type="text" 
-                required 
-                placeholder="e.g. DHA, Gulberg, F-10, Clifton"
                 className="w-full bg-brand-surface text-white p-3 rounded-xl border border-white/10 focus:outline-none focus:border-brand-gold"
               />
             </div>
@@ -191,7 +163,7 @@ export default function CheckoutModal({ isOpen, onClose, onOrderPlaced }) {
 
               <label 
                 className={`p-3 rounded-2xl border flex flex-col items-center justify-center text-center cursor-pointer transition-all ${
-                  formData.paymentMethod === 'cod' 
+                  formData.paymentMethod === 'easypaisa'
                     ? 'bg-brand-gold/15 border-brand-gold text-white font-bold ring-1 ring-brand-gold' 
                     : 'bg-brand-surface border-white/10 text-gray-400'
                 }`}
@@ -199,14 +171,14 @@ export default function CheckoutModal({ isOpen, onClose, onOrderPlaced }) {
                 <input 
                   type="radio" 
                   name="paymentMethod" 
-                  value="cod" 
-                  checked={formData.paymentMethod === 'cod'} 
-                  onChange={() => setFormData({ ...formData, paymentMethod: 'cod' })}
+                  value="easypaisa"
+                  checked={formData.paymentMethod === 'easypaisa'}
+                  onChange={() => setFormData({ ...formData, paymentMethod: 'easypaisa' })}
                   className="hidden" 
                 />
-                <i className="fa-solid fa-money-bill-wave text-emerald-400 text-base mb-1"></i>
-                <span className="text-xs">Cash on Delivery</span>
-                <span className="text-[9px] text-emerald-400 font-semibold mt-0.5">Pay at doorstep</span>
+                <i className="fa-solid fa-mobile-screen-button text-emerald-400 text-base mb-1"></i>
+                <span className="text-xs">Easypaisa</span>
+                <span className="text-[9px] text-emerald-400 font-semibold mt-0.5">Mobile wallet</span>
               </label>
 
               <label 
@@ -270,8 +242,8 @@ export default function CheckoutModal({ isOpen, onClose, onOrderPlaced }) {
                   <label className="block text-gray-300 font-semibold text-[11px]">
                     Sender Mobile / Transaction ID (TID)
                   </label>
-                  <input 
-                    type="text" 
+                  <input
+                    type="text"
                     value={formData.transactionId}
                     onChange={(e) => setFormData({ ...formData, transactionId: e.target.value })}
                     placeholder="Enter your JazzCash number or TID (e.g. 03xx-xxxxxxx)"
@@ -281,6 +253,40 @@ export default function CheckoutModal({ isOpen, onClose, onOrderPlaced }) {
                     💡 Please send <strong>{CURRENCY} {grandTotal.toLocaleString()}</strong> to <strong>{STORE_CONTACT.jazzCashNumber}</strong>. We'll verify and prepare your meal right away!
                   </p>
                 </div>
+              </div>
+            )}
+
+            {formData.paymentMethod === 'easypaisa' && (
+              <div className="mt-3 p-4 rounded-2xl bg-gradient-to-br from-neutral-900 to-brand-surface border border-emerald-500/40 space-y-2 animate-fadeIn">
+                <div className="flex items-center gap-2">
+                  <i className="fa-solid fa-mobile-screen-button text-emerald-400"></i>
+                  <span className="text-xs font-bold text-white">Easypaisa Payment</span>
+                </div>
+                <p className="text-[11px] text-gray-300">
+                  Submit your order and we’ll contact you with Easypaisa payment instructions. Please wait for confirmation before sending payment.
+                </p>
+                <label className="block text-gray-300 font-semibold text-[11px]">
+                  Sender Mobile / Transaction ID (Optional)
+                </label>
+                <input
+                  type="text"
+                  value={formData.transactionId}
+                  onChange={(e) => setFormData({ ...formData, transactionId: e.target.value })}
+                  placeholder="Enter your Easypaisa number or transaction ID"
+                  className="w-full bg-brand-surface text-white p-2.5 rounded-xl border border-white/10 focus:outline-none focus:border-brand-gold text-xs"
+                />
+              </div>
+            )}
+
+            {formData.paymentMethod === 'card' && (
+              <div className="mt-3 p-4 rounded-2xl bg-gradient-to-br from-neutral-900 to-brand-surface border border-brand-red/40 space-y-2 animate-fadeIn">
+                <div className="flex items-center gap-2">
+                  <i className="fa-solid fa-credit-card text-brand-red"></i>
+                  <span className="text-xs font-bold text-white">Debit / Credit Card</span>
+                </div>
+                <p className="text-[11px] text-gray-300">
+                  Card payments are not processed on this site yet. Submit your order and we’ll contact you to arrange payment.
+                </p>
               </div>
             )}
           </div>
@@ -329,4 +335,3 @@ export default function CheckoutModal({ isOpen, onClose, onOrderPlaced }) {
     </div>
   );
 }
-

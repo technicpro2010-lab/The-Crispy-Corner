@@ -14,8 +14,7 @@ export default function CartDrawer({ onOpenCheckout }) {
     deliveryFee, 
     grandTotal, 
     amountNeededForFreeDelivery,
-    FREE_DELIVERY_THRESHOLD,
-    selectedCity
+    FREE_DELIVERY_THRESHOLD
   } = useCart();
 
   if (!isCartOpen) return null;
@@ -24,7 +23,7 @@ export default function CartDrawer({ onOpenCheckout }) {
     if (cart.length === 0) return;
 
     let message = `🍗 *NEW ORDER - THE CRISPY CORNER*\n`;
-    message += `📍 *City:* ${selectedCity}\n`;
+    message += `💳 *Payment:* Cash on Delivery (COD)\n`;
     message += `──────────────────\n`;
 
     cart.forEach((item, index) => {
@@ -41,7 +40,7 @@ export default function CartDrawer({ onOpenCheckout }) {
     message += `*Subtotal:* ${CURRENCY} ${subtotal.toLocaleString()}\n`;
     message += `*Delivery Fee:* ${deliveryFee === 0 ? 'FREE' : `${CURRENCY} ${deliveryFee}`}\n`;
     message += `*TOTAL PAYABLE:* ${CURRENCY} ${grandTotal.toLocaleString()}\n\n`;
-    message += `Please confirm my order and share estimated delivery time. Shukriya!`;
+    message += `Please confirm my order and share estimated delivery time. I will provide my delivery address in this chat. Shukriya!`;
 
     const encoded = encodeURIComponent(message);
     window.open(`https://wa.me/${STORE_CONTACT.whatsappRaw}?text=${encoded}`, '_blank');
@@ -98,7 +97,7 @@ export default function CartDrawer({ onOpenCheckout }) {
                 </span>
               ) : (
                 <span className="text-emerald-400 font-bold flex items-center gap-1.5">
-                  <i className="fa-solid fa-circle-check"></i> FREE Delivery Unlocked across {selectedCity}!
+                  <i className="fa-solid fa-circle-check"></i> FREE Delivery Unlocked!
                 </span>
               )}
               <span className="text-[11px] text-gray-400">{progressPercent}%</span>
@@ -224,7 +223,7 @@ export default function CartDrawer({ onOpenCheckout }) {
                   className="w-full py-3.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold flex items-center justify-center gap-2 transition-all shadow-lg active:scale-98 cursor-pointer"
                 >
                   <i className="fa-brands fa-whatsapp text-xl"></i>
-                  <span>Order via WhatsApp ({selectedCity})</span>
+                  <span>Order via WhatsApp (COD)</span>
                 </button>
 
                 <button 
@@ -234,7 +233,7 @@ export default function CartDrawer({ onOpenCheckout }) {
                   }}
                   className="w-full py-3 rounded-xl bg-brand-gold text-black font-extrabold hover:bg-yellow-400 transition-all text-sm shadow-md shadow-brand-gold/25 active:scale-98 cursor-pointer"
                 >
-                  Direct Web Checkout (COD / Online)
+                  Direct Web Checkout (Online)
                 </button>
               </div>
             </div>
@@ -245,4 +244,3 @@ export default function CartDrawer({ onOpenCheckout }) {
     </div>
   );
 }
-
